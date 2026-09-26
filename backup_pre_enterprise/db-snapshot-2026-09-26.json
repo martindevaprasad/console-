@@ -1,0 +1,388 @@
+{
+  "exportedAt": "2026-09-26T20:16:55.533Z",
+  "tables": {
+    "Category": [
+      {
+        "id": "cmu2h15e7000e124j8rd40g7g",
+        "name": "Coffee & Drinks",
+        "description": "Artisanal espresso drinks and teas",
+        "color": "#7c3aed",
+        "icon": null,
+        "isActive": true,
+        "organizationId": "cmu2h12ix0000124jldw1u5yv",
+        "createdAt": "2026-09-15T09:30:19.663Z",
+        "updatedAt": "2026-09-15T09:30:19.663Z"
+      },
+      {
+        "id": "cmu2h15sj000g124jp7vzkrfo",
+        "name": "Bakery & Food",
+        "description": "Croissants, cakes, and sandwiches",
+        "color": "#06b6d4",
+        "icon": null,
+        "isActive": true,
+        "organizationId": "cmu2h12ix0000124jldw1u5yv",
+        "createdAt": "2026-09-15T09:30:20.179Z",
+        "updatedAt": "2026-09-15T09:30:20.179Z"
+      }
+    ],
+    "Department": [
+      {
+        "id": "cmu2h149n0008124jko9qn7rp",
+        "name": "Main Counter",
+        "description": "Coffee brewing and register area",
+        "isActive": true,
+        "locationId": "cmu2h13m10004124jb0x3nz7a",
+        "createdAt": "2026-09-15T09:30:18.203Z",
+        "updatedAt": "2026-09-15T09:30:18.203Z"
+      },
+      {
+        "id": "cmu2h14no000a124jn92vjevx",
+        "name": "Kitchen Area",
+        "description": "Kitchen and meal preparation area",
+        "isActive": true,
+        "locationId": "cmu2h13m10004124jb0x3nz7a",
+        "createdAt": "2026-09-15T09:30:18.709Z",
+        "updatedAt": "2026-09-15T09:30:18.709Z"
+      }
+    ],
+    "FloorPlanZone": [],
+    "Inventory": [
+      {
+        "id": "cmu2h16f8000i124ji3jrlm5i",
+        "quantity": 50,
+        "minStock": 10,
+        "maxStock": null,
+        "unit": "unit",
+        "productId": "seed-espresso-double",
+        "locationId": "cmu2h13m10004124jb0x3nz7a",
+        "createdAt": "2026-09-15T09:30:20.996Z",
+        "updatedAt": "2026-09-15T09:30:20.996Z"
+      },
+      {
+        "id": "cmu2h16ti000k124j7m2ur4nf",
+        "quantity": 25,
+        "minStock": 5,
+        "maxStock": null,
+        "unit": "unit",
+        "productId": "seed-espresso-double",
+        "locationId": "cmu2h140o0006124jt8ccty88",
+        "createdAt": "2026-09-15T09:30:21.510Z",
+        "updatedAt": "2026-09-15T09:30:21.510Z"
+      },
+      {
+        "id": "cmu2h17jk000o124jc8u6t5nx",
+        "quantity": 25,
+        "minStock": 5,
+        "maxStock": null,
+        "unit": "unit",
+        "productId": "seed-vanilla-latte",
+        "locationId": "cmu2h140o0006124jt8ccty88",
+        "createdAt": "2026-09-15T09:30:22.448Z",
+        "updatedAt": "2026-09-15T09:30:22.448Z"
+      },
+      {
+        "id": "cmu2h181d000q124jdo29mp0e",
+        "quantity": 50,
+        "minStock": 10,
+        "maxStock": null,
+        "unit": "unit",
+        "productId": "seed-cappuccino-latte",
+        "locationId": "cmu2h13m10004124jb0x3nz7a",
+        "createdAt": "2026-09-15T09:30:23.089Z",
+        "updatedAt": "2026-09-15T09:30:23.089Z"
+      },
+      {
+        "id": "cmu2h18ad000s124jjtt0f40c",
+        "quantity": 25,
+        "minStock": 5,
+        "maxStock": null,
+        "unit": "unit",
+        "productId": "seed-cappuccino-latte",
+        "locationId": "cmu2h140o0006124jt8ccty88",
+        "createdAt": "2026-09-15T09:30:23.413Z",
+        "updatedAt": "2026-09-15T09:30:23.413Z"
+      },
+      {
+        "id": "cmu2h18ru000u124jarx6pzaq",
+        "quantity": 50,
+        "minStock": 10,
+        "maxStock": null,
+        "unit": "unit",
+        "productId": "seed-butter-croissant",
+        "locationId": "cmu2h13m10004124jb0x3nz7a",
+        "createdAt": "2026-09-15T09:30:24.043Z",
+        "updatedAt": "2026-09-15T09:30:24.043Z"
+      },
+      {
+        "id": "cmu2h1908000w124j7ln7st2x",
+        "quantity": 25,
+        "minStock": 5,
+        "maxStock": null,
+        "unit": "unit",
+        "productId": "seed-butter-croissant",
+        "locationId": "cmu2h140o0006124jt8ccty88",
+        "createdAt": "2026-09-15T09:30:24.345Z",
+        "updatedAt": "2026-09-15T09:30:24.345Z"
+      },
+      {
+        "id": "cmu2h19hp000y124jcr4z38bu",
+        "quantity": 50,
+        "minStock": 10,
+        "maxStock": null,
+        "unit": "unit",
+        "productId": "seed-chocolate-muffin",
+        "locationId": "cmu2h13m10004124jb0x3nz7a",
+        "createdAt": "2026-09-15T09:30:24.974Z",
+        "updatedAt": "2026-09-15T09:30:24.974Z"
+      },
+      {
+        "id": "cmu2h19qg0010124jhn34ijxn",
+        "quantity": 25,
+        "minStock": 5,
+        "maxStock": null,
+        "unit": "unit",
+        "productId": "seed-chocolate-muffin",
+        "locationId": "cmu2h140o0006124jt8ccty88",
+        "createdAt": "2026-09-15T09:30:25.288Z",
+        "updatedAt": "2026-09-15T09:30:25.288Z"
+      },
+      {
+        "id": "cmu2h1a7j0012124jfpjocmxd",
+        "quantity": 50,
+        "minStock": 10,
+        "maxStock": null,
+        "unit": "unit",
+        "productId": "seed-avocado-toast",
+        "locationId": "cmu2h13m10004124jb0x3nz7a",
+        "createdAt": "2026-09-15T09:30:25.903Z",
+        "updatedAt": "2026-09-15T09:30:25.903Z"
+      },
+      {
+        "id": "cmu2h1ag80014124joc18ty51",
+        "quantity": 25,
+        "minStock": 5,
+        "maxStock": null,
+        "unit": "unit",
+        "productId": "seed-avocado-toast",
+        "locationId": "cmu2h140o0006124jt8ccty88",
+        "createdAt": "2026-09-15T09:30:26.216Z",
+        "updatedAt": "2026-09-15T09:30:26.216Z"
+      },
+      {
+        "id": "cmu2h17b4000m124jxu4s78bo",
+        "quantity": 49,
+        "minStock": 10,
+        "maxStock": null,
+        "unit": "unit",
+        "productId": "seed-vanilla-latte",
+        "locationId": "cmu2h13m10004124jb0x3nz7a",
+        "createdAt": "2026-09-15T09:30:22.145Z",
+        "updatedAt": "2026-09-15T14:31:21.346Z"
+      }
+    ],
+    "Location": [
+      {
+        "id": "cmu2h13m10004124jb0x3nz7a",
+        "name": "Downtown Cafe",
+        "address": "123 Main St, New York, NY",
+        "phone": "+1 (555) 123-4567",
+        "email": "downtown@nexuscafe.com",
+        "isActive": true,
+        "organizationId": "cmu2h12ix0000124jldw1u5yv",
+        "createdAt": "2026-09-15T09:30:17.353Z",
+        "updatedAt": "2026-09-15T09:30:17.353Z"
+      },
+      {
+        "id": "cmu2h140o0006124jt8ccty88",
+        "name": "Uptown Corner",
+        "address": "456 Park Ave, New York, NY",
+        "phone": "+1 (555) 234-5678",
+        "email": "uptown@nexuscafe.com",
+        "isActive": true,
+        "organizationId": "cmu2h12ix0000124jldw1u5yv",
+        "createdAt": "2026-09-15T09:30:17.880Z",
+        "updatedAt": "2026-09-15T09:30:17.880Z"
+      }
+    ],
+    "Order": [
+      {
+        "id": "cmu2rs8qn0001vi8qpil2kuzp",
+        "orderNumber": "ORD-MU2RS8OL-CZJ",
+        "status": "COMPLETED",
+        "paymentMethod": "CASH",
+        "subtotal": 4.8,
+        "taxAmount": 0.384,
+        "discountAmount": 0,
+        "total": 5.184,
+        "notes": null,
+        "organizationId": "cmu2h12ix0000124jldw1u5yv",
+        "locationId": "cmu2h13m10004124jb0x3nz7a",
+        "userId": "cmu2h136t0002124jg8ztw2rs",
+        "orderType": "DINE_IN",
+        "tableSessionId": null,
+        "createdAt": "2026-09-15T14:31:19.867Z",
+        "updatedAt": "2026-09-15T14:31:19.867Z"
+      }
+    ],
+    "OrderItem": [
+      {
+        "id": "cmu2rs8qn0003vi8qragpfvmc",
+        "quantity": 1,
+        "price": 4.8,
+        "subtotal": 4.8,
+        "notes": null,
+        "orderId": "cmu2rs8qn0001vi8qpil2kuzp",
+        "productId": "seed-vanilla-latte",
+        "createdAt": "2026-09-15T14:31:19.867Z"
+      }
+    ],
+    "Organization": [
+      {
+        "id": "cmu2h12ix0000124jldw1u5yv",
+        "name": "Nexus Cafe Group",
+        "domain": null,
+        "type": "CAFE",
+        "logoUrl": null,
+        "address": "789 Broadway Ave, New York, NY",
+        "phone": "+1 (555) 987-6543",
+        "email": "hq@nexuscafe.com",
+        "taxRate": 8,
+        "isActive": true,
+        "createdAt": "2026-09-15T09:30:15.944Z",
+        "updatedAt": "2026-09-15T09:30:15.944Z"
+      }
+    ],
+    "Product": [
+      {
+        "id": "seed-espresso-double",
+        "name": "Espresso Double",
+        "description": null,
+        "sku": "SKU-ESP-01",
+        "price": 3.5,
+        "cost": 1.05,
+        "imageUrl": null,
+        "isActive": true,
+        "organizationId": "cmu2h12ix0000124jldw1u5yv",
+        "locationId": null,
+        "departmentId": null,
+        "categoryId": "cmu2h15e7000e124j8rd40g7g",
+        "createdAt": "2026-09-15T09:30:20.489Z",
+        "updatedAt": "2026-09-15T09:30:20.489Z"
+      },
+      {
+        "id": "seed-vanilla-latte",
+        "name": "Vanilla Latte",
+        "description": null,
+        "sku": "SKU-VAN-01",
+        "price": 4.8,
+        "cost": 1.44,
+        "imageUrl": null,
+        "isActive": true,
+        "organizationId": "cmu2h12ix0000124jldw1u5yv",
+        "locationId": null,
+        "departmentId": null,
+        "categoryId": "cmu2h15e7000e124j8rd40g7g",
+        "createdAt": "2026-09-15T09:30:21.819Z",
+        "updatedAt": "2026-09-15T09:30:21.819Z"
+      },
+      {
+        "id": "seed-cappuccino-latte",
+        "name": "Cappuccino Latte",
+        "description": null,
+        "sku": "SKU-CAP-01",
+        "price": 4.5,
+        "cost": 1.35,
+        "imageUrl": null,
+        "isActive": true,
+        "organizationId": "cmu2h12ix0000124jldw1u5yv",
+        "locationId": null,
+        "departmentId": null,
+        "categoryId": "cmu2h15e7000e124j8rd40g7g",
+        "createdAt": "2026-09-15T09:30:22.783Z",
+        "updatedAt": "2026-09-15T09:30:22.783Z"
+      },
+      {
+        "id": "seed-butter-croissant",
+        "name": "Butter Croissant",
+        "description": null,
+        "sku": "SKU-BUT-01",
+        "price": 3.8,
+        "cost": 1.14,
+        "imageUrl": null,
+        "isActive": true,
+        "organizationId": "cmu2h12ix0000124jldw1u5yv",
+        "locationId": null,
+        "departmentId": null,
+        "categoryId": "cmu2h15sj000g124jp7vzkrfo",
+        "createdAt": "2026-09-15T09:30:23.723Z",
+        "updatedAt": "2026-09-15T09:30:23.723Z"
+      },
+      {
+        "id": "seed-chocolate-muffin",
+        "name": "Chocolate Muffin",
+        "description": null,
+        "sku": "SKU-CHO-01",
+        "price": 4.2,
+        "cost": 1.26,
+        "imageUrl": null,
+        "isActive": true,
+        "organizationId": "cmu2h12ix0000124jldw1u5yv",
+        "locationId": null,
+        "departmentId": null,
+        "categoryId": "cmu2h15sj000g124jp7vzkrfo",
+        "createdAt": "2026-09-15T09:30:24.661Z",
+        "updatedAt": "2026-09-15T09:30:24.661Z"
+      },
+      {
+        "id": "seed-avocado-toast",
+        "name": "Avocado Toast",
+        "description": null,
+        "sku": "SKU-AVO-01",
+        "price": 9.5,
+        "cost": 2.85,
+        "imageUrl": null,
+        "isActive": true,
+        "organizationId": "cmu2h12ix0000124jldw1u5yv",
+        "locationId": null,
+        "departmentId": null,
+        "categoryId": "cmu2h15sj000g124jp7vzkrfo",
+        "createdAt": "2026-09-15T09:30:25.598Z",
+        "updatedAt": "2026-09-15T09:30:25.598Z"
+      }
+    ],
+    "Table": [],
+    "TableSession": [],
+    "User": [
+      {
+        "id": "cmu2h136t0002124jg8ztw2rs",
+        "email": "owner@nexuscafe.com",
+        "password": "$2a$12$RxRbjGDgtB3C68rNc2oXoOx54hPA4JqybmHhYmG6VCWL46vEtd8rW",
+        "name": "Martin Devaprasad",
+        "role": "OWNER",
+        "phone": "+1 (555) 111-2222",
+        "avatarUrl": null,
+        "isActive": true,
+        "organizationId": "cmu2h12ix0000124jldw1u5yv",
+        "locationId": null,
+        "departmentId": null,
+        "createdAt": "2026-09-15T09:30:16.804Z",
+        "updatedAt": "2026-09-15T09:30:16.804Z"
+      },
+      {
+        "id": "cmu2h153i000c124jrw3yiu59",
+        "email": "staff@nexuscafe.com",
+        "password": "$2a$12$/8rnjs9gEgQeVhmUUBo6NOpFzHeCIs1.YGbP1vUwlh7R0c3Zq.zMC",
+        "name": "Jane Doe",
+        "role": "STAFF",
+        "phone": "+1 (555) 333-4444",
+        "avatarUrl": null,
+        "isActive": true,
+        "organizationId": "cmu2h12ix0000124jldw1u5yv",
+        "locationId": "cmu2h13m10004124jb0x3nz7a",
+        "departmentId": "cmu2h149n0008124jko9qn7rp",
+        "createdAt": "2026-09-15T09:30:19.279Z",
+        "updatedAt": "2026-09-15T09:30:19.279Z"
+      }
+    ]
+  }
+}

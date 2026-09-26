@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx prisma *)",
+      "PowerShell(Get-Process node -ErrorAction SilentlyContinue)",
+      "PowerShell(Stop-Process -Force -Confirm:$false)",
+      "Bash(npm run *)",
+      "Bash(sed -i -E 's/^\\(\\\\s+\\(permissions|dietary|tags\\)\\\\s+String\\\\[\\\\]\\)\\\\s*$/\\\\1 @default\\([]\\)/; s/^\\(\\\\s+daysOfWeek\\\\s+Int\\\\[\\\\]\\)\\\\s*$/\\\\1 @default\\([]\\)/' prisma/schema.prisma)",
+      "Bash(tasklist)",
+      "Bash(sed -i -E 's/^\\(\\\\s+\\)discountReason\\(\\\\s+\\)String\\\\?$/&\\\\n\\\\1discountSpec\\\\2Json?/' prisma/schema.prisma)",
+      "Bash(sed -i -E \"s/await tx\\\\.table\\\\.update\\\\\\(\\\\{ where: \\\\{ id: \\([a-zA-Z.!]+\\) \\\\}, data: \\(\\\\{ status: '[A-Z_]+' \\\\}\\) \\\\}\\\\\\)\\\\.catch\\\\\\(\\\\\\(\\\\\\) => null\\\\\\);/await tx.table.updateMany\\({ where: { id: \\\\1 }, data: \\\\2 }\\);/g; s/await tx\\\\.discount\\\\.update\\\\\\(\\\\{ where: \\\\{ id: order\\\\.discountId \\\\}, data: \\(\\\\{ usageCount: \\\\{ increment: 1 \\\\} \\\\}\\) \\\\}\\\\\\)\\\\.catch\\\\\\(\\\\\\(\\\\\\) => null\\\\\\);/await tx.discount.updateMany\\({ where: { id: order.discountId }, data: \\\\1 }\\);/\" orders.ts)",
+      "Bash(sed -i -E \"s/  const settings = \\\\\\(await import\\\\\\('..\\\\/..\\\\/lib\\\\/templates'\\\\\\)\\\\\\)\\\\.resolveSettings\\\\\\(o\\\\.organization\\\\.settings\\\\\\);/  const settings = resolveSettings\\(o.organization.settings\\);/; s/^import \\\\{ OrgSettings \\\\} from '..\\\\/..\\\\/lib\\\\/templates';/import { OrgSettings, resolveSettings } from '..\\\\/..\\\\/lib\\\\/templates';/\" orders.ts)",
+      "Bash(sed -i \"s#    origin: \\\\['http://localhost:5173', 'http://localhost:3000'\\\\],#    origin: process.env.CORS_ORIGINS ? process.env.CORS_ORIGINS.split\\(','\\) : ['http://localhost:5173', 'http://localhost:3000'],#\" src/index.ts)",
+      "Bash(npx tsc *)",
+      "Bash(TS_NODE_TRANSPILE_ONLY=1 node -e ' *)"
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "name": "nexuspos-backend",
+  "version": "1.0.0",
+  "description": "NexusPOS SaaS Backend - GraphQL API",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "build": "tsc",
+    "vercel-build": "prisma generate && tsc",
+    "postinstall": "prisma generate",
+    "start": "node dist/index.js",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma migrate dev",
+    "db:studio": "prisma studio",
+    "seed": "ts-node src/seed.ts",
+    "db:backfill": "ts-node --transpile-only src/scripts/backfill.ts"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.10.0",
+    "@graphql-tools/merge": "^9.0.3",
+    "@prisma/client": "^5.10.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.4",
+    "express": "^4.18.2",
+    "graphql": "^16.8.1",
+    "graphql-tag": "^2.12.6",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.5",
+    "@types/node": "^20.11.5",
+    "prisma": "^5.10.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.3.3"
+  }
+}

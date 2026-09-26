@@ -1,0 +1,35 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "backend/api/index.ts",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/backend/api/index.ts"
+    },
+    {
+      "src": "/assets/(.*)",
+      "dest": "/frontend/assets/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/frontend/index.html"
+    }
+  ],
+  "env": {
+    "DATABASE_URL": "postgres://184227ad6044c9c03a8de37aba4e8f3d257426377f40ae8ad9a7cfa4c25fc9b2:sk_nvgEdLcU8JijB8d9M3-Qe@pooled.db.prisma.io:5432/postgres?sslmode=require",
+    "JWT_SECRET": "nexuspos-super-secret-jwt-key-change-in-production",
+    "NODE_ENV": "production"
+  }
+}
