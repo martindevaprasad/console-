@@ -1,7 +1,8 @@
+// Deployed: frontend and API share one origin (/api/* is routed to the backend function).
+// Local dev: the backend runs separately on :5002.
+const isLocal = ['localhost', '127.0.0.1'].includes(window.location.hostname);
 const API_URL = import.meta.env.VITE_API_URL ||
-  (window.location.hostname.endsWith('vercel.app')
-    ? `https://${window.location.hostname}/api/graphql`
-    : 'http://localhost:5002/graphql');
+  (isLocal ? 'http://localhost:5002/graphql' : `${window.location.origin}/api/graphql`);
 
 export class ApiError extends Error {
   code?: string;
@@ -20,7 +21,15 @@ async function gql(query: string, variables: Record<string, any> = {}, token?: s
     },
     body: JSON.stringify({ query, variables }),
   });
-  const json = await res.json();
+  const text = await res.text();
+  let json: any;
+  try {
+    json = JSON.parse(text);
+  } catch {
+    // Usually a hosting 404/500 page: the API is not deployed at API_URL.
+    console.error(`API at ${API_URL} returned non-JSON (HTTP ${res.status}):`, text.slice(0, 200));
+    throw new ApiError(`Cannot reach the API (HTTP ${res.status} from ${API_URL}). Check VITE_API_URL / backend deployment.`, 'API_UNREACHABLE');
+  }
   if (json.errors) {
     const e = json.errors[0];
     const code = e?.extensions?.code;
