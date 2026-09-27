@@ -35,3 +35,6 @@ backend/prisma/migrations/
 
 # Vercel
 .vercel/
+
+# Local backups (contain data snapshots — never commit)
+backup_pre_enterprise/
