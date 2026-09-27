@@ -5,7 +5,8 @@
 // every resolver scopes by the organization taken from the JWT.
 // ============================================================
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
 }
 
 datasource db {

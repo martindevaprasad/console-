@@ -1,10 +1,15 @@
 import jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
 
-if (!process.env.JWT_SECRET && process.env.NODE_ENV === 'production') {
-  throw new Error('JWT_SECRET must be set in production');
-}
-const JWT_SECRET = process.env.JWT_SECRET || 'nexuspos-secret';
+// Resolved per call (not at import) so a missing secret surfaces as a clear API
+// error instead of crashing the whole serverless function on cold start.
+const getSecret = (): string => {
+  if (process.env.JWT_SECRET) return process.env.JWT_SECRET;
+  if (process.env.NODE_ENV === 'production') {
+    throw new Error('Server misconfigured: JWT_SECRET environment variable is not set');
+  }
+  return 'nexuspos-secret';
+};
 
 export interface JWTPayload {
   userId: string;
@@ -15,12 +20,12 @@ export interface JWTPayload {
 }
 
 export const generateToken = (payload: JWTPayload): string => {
-  return jwt.sign(payload, JWT_SECRET, { expiresIn: '12h' });
+  return jwt.sign(payload, getSecret(), { expiresIn: '12h' });
 };
 
 export const verifyToken = (token: string): JWTPayload | null => {
   try {
-    return jwt.verify(token, JWT_SECRET) as JWTPayload;
+    return jwt.verify(token, getSecret()) as JWTPayload;
   } catch {
     return null;
   }
