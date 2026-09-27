@@ -26,5 +26,10 @@
       "src": "/(.*)",
       "dest": "/frontend/index.html"
     }
-  ]
+  ],
+  "env": {
+    "DATABASE_URL": "postgres://87cf068bfa6cc2ae71f7c3e9708be412e710376b436855d6e2004ef45680da5d:sk_9CzRKkSEDIDu-A4wa0Du6@pooled.db.prisma.io:5432/postgres?sslmode=require",
+    "JWT_SECRET": "nexuspos-super-secret-jwt-key-change-in-production",
+    "NODE_ENV": "production"
+  }
 }
