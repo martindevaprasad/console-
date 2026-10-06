@@ -83,7 +83,7 @@ export const ReportsPage: React.FC = () => {
                       <XAxis dataKey="day" tick={{ fontSize: 10, fill: 'var(--text-muted)' }} tickFormatter={(d) => d.slice(5)} axisLine={false} tickLine={false} />
                       <YAxis tick={{ fontSize: 10, fill: 'var(--text-muted)' }} tickFormatter={(v) => money(v, { compact: true })} axisLine={false} tickLine={false} />
                       <Tooltip contentStyle={tooltipStyle} formatter={(v: any) => money(v)} />
-                      <Bar dataKey="sales" fill="#7c3aed" radius={[4, 4, 0, 0]} />
+                      <Bar dataKey="sales" fill="var(--color-primary)" radius={[4, 4, 0, 0]} />
                     </BarChart></ResponsiveContainer>
                   </div>
                 </div>
@@ -95,7 +95,7 @@ export const ReportsPage: React.FC = () => {
                       <XAxis dataKey="hour" tick={{ fontSize: 10, fill: 'var(--text-muted)' }} axisLine={false} tickLine={false} />
                       <YAxis tick={{ fontSize: 10, fill: 'var(--text-muted)' }} tickFormatter={(v) => money(v, { compact: true })} axisLine={false} tickLine={false} />
                       <Tooltip contentStyle={tooltipStyle} formatter={(v: any) => money(v)} labelFormatter={(h) => `${h}:00`} />
-                      <Bar dataKey="sales" fill="#06b6d4" radius={[4, 4, 0, 0]} />
+                      <Bar dataKey="sales" fill="var(--color-accent)" radius={[4, 4, 0, 0]} />
                     </BarChart></ResponsiveContainer>
                   </div>
                 </div>

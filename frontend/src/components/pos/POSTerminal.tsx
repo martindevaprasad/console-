@@ -339,7 +339,8 @@ export const POSTerminal: React.FC = () => {
               const stock = stockFor(p);
               const soldOut = stock !== null && stock <= 0;
               return (
-                <button key={p.id} className={`pos-item${soldOut ? ' disabled' : ''}`} style={{ ['--item-color' as any]: p.color || p.category?.color || 'var(--color-primary)' }} onClick={() => addProduct(p)}>
+                <button key={p.id} className={`pos-item${soldOut ? ' disabled' : ''}${settings?.modules?.menuImages && p.imageUrl ? ' has-image' : ''}`} style={{ ['--item-color' as any]: p.color || p.category?.color || 'var(--color-primary)' }} onClick={() => addProduct(p)}>
+                  {settings?.modules?.menuImages && p.imageUrl && <img className="pos-item-img" src={p.imageUrl} alt="" loading="lazy" />}
                   {p.modifierGroups.length > 0 && <span className="pos-item-flag">OPTIONS</span>}
                   {soldOut && <span className="pos-item-flag text-danger">86</span>}
                   <span className="pos-item-name">{p.name}</span>

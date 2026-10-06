@@ -1,5 +1,5 @@
 import React from 'react';
-import { MageOS } from '../layout/AppSvgs';
+import { MageWordmark } from '../layout/AppSvgs';
 
 interface AuthLayoutProps {
   children: React.ReactNode;
@@ -11,11 +11,9 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
       {/* Left Panel - Branding & POS Stats */}
       <div className="auth-left-panel">
         <div className="auth-left-branding">
-          <div className="auth-left-branding-icon">
-            <MageOS />
-          </div>
+          <MageWordmark height={36} className="brand-wordmark" />
           <div className="auth-left-branding-text">
-            MageOS <span>/ Workspace</span>
+            <span>/ Workspace</span>
           </div>
         </div>
 

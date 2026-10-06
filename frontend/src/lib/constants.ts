@@ -60,6 +60,7 @@ export const MODULE_INFO: { key: string; label: string; desc: string }[] = [
   { key: 'timeclock', label: 'Time clock', desc: 'Clock in/out, breaks, labour hours' },
   { key: 'onlineOrdering', label: 'Online & aggregator orders', desc: 'Web, QR and delivery-partner channels' },
   { key: 'multiLocation', label: 'Multi-location', desc: 'Multiple outlets, central menu, roll-up reporting' },
+  { key: 'menuImages', label: 'Menu item images', desc: 'Photos on menu items and POS buttons; off keeps text-only tiles' },
 ];
 
 export const CHANNELS = ['POS', 'KIOSK', 'ONLINE', 'QR', 'AGGREGATOR', 'PHONE'];
@@ -71,6 +72,6 @@ export const TABLE_STATUS_STYLE: Record<string, { color: string; bg: string; lab
   SEATED: { color: '#93c5fd', bg: 'var(--color-info-glow)', label: 'Seated' },
   ORDERING: { color: 'var(--color-primary-light)', bg: 'var(--color-primary-glow)', label: 'Ordering' },
   WAITING_FOR_FOOD: { color: 'var(--color-warning-light)', bg: 'var(--color-warning-glow)', label: 'Waiting food' },
-  READY_FOR_PAYMENT: { color: 'var(--color-accent-light)', bg: 'var(--color-accent-glow)', label: 'Bill requested' },
-  NEEDS_CLEANING: { color: 'var(--text-secondary)', bg: 'rgba(148, 163, 184, 0.12)', label: 'Needs cleaning' },
+  READY_FOR_PAYMENT: { color: '#ffffff', bg: 'var(--color-primary)', label: 'Bill requested' },
+  NEEDS_CLEANING: { color: 'var(--text-secondary)', bg: 'rgba(163, 163, 163, 0.12)', label: 'Needs cleaning' },
 };

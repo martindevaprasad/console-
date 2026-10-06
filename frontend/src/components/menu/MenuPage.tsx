@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
-import { IconPlus, IconTrash, IconToolsKitchen2, IconCategory, IconAdjustments, IconReceiptTax, IconDownload } from '@tabler/icons-react';
+import { IconPlus, IconTrash, IconToolsKitchen2, IconCategory, IconAdjustments, IconReceiptTax, IconDownload, IconPhoto, IconUpload } from '@tabler/icons-react';
 import { useApi, useCan, useLocation, useModule, useMutate, useOrg } from '@/hooks';
 import { CATALOG, INVENTORY } from '@/services/api';
 import { money, pct, downloadCsv, label } from '@/lib/format';
@@ -10,7 +10,64 @@ import Modal from '../shared/Modal';
 import LoadingSpinner from '../shared/LoadingSpinner';
 
 type Tab = 'items' | 'categories' | 'modifiers' | 'taxes';
-const COLORS = ['#7c3aed', '#06b6d4', '#10b981', '#f59e0b', '#ef4444', '#3b82f6', '#ec4899', '#94a3b8'];
+const COLORS = ['#7c3aed', '#10b981', '#f59e0b', '#ef4444', '#3b82f6', '#ec4899', '#a3a3a3'];
+
+/**
+ * Downscale an uploaded photo to a small JPEG data URL. Images are stored inline
+ * on Product.imageUrl (no file storage service), so they must stay well under the
+ * API's JSON body limit and keep the POS menu payload light.
+ */
+const IMAGE_MAX_PX = 320;
+const IMAGE_MAX_BYTES = 80_000;
+function fileToImageDataUrl(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const src = URL.createObjectURL(file);
+    img.onload = () => {
+      URL.revokeObjectURL(src);
+      const scale = Math.min(1, IMAGE_MAX_PX / Math.max(img.width, img.height));
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.round(img.width * scale);
+      canvas.height = Math.round(img.height * scale);
+      const ctx = canvas.getContext('2d')!;
+      ctx.fillStyle = '#ffffff'; // transparent PNGs would otherwise turn black as JPEG
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      for (const q of [0.82, 0.7, 0.55, 0.4]) {
+        const url = canvas.toDataURL('image/jpeg', q);
+        if (url.length <= IMAGE_MAX_BYTES) return resolve(url);
+      }
+      reject(new Error('Image is too detailed to compress — try a simpler photo'));
+    };
+    img.onerror = () => { URL.revokeObjectURL(src); reject(new Error('Not a readable image file')); };
+    img.src = src;
+  });
+}
+
+const ImageField: React.FC<{ value: string; onChange: (v: string) => void }> = ({ value, onChange }) => {
+  const isData = value.startsWith('data:');
+  return (
+    <div className="image-field">
+      <div className="image-field-preview">{value ? <img src={value} alt="" /> : <IconPhoto size={22} opacity={0.35} />}</div>
+      <div className="image-field-controls">
+        <div className="row" style={{ gap: 6 }}>
+          <label className="btn btn-secondary btn-sm" style={{ cursor: 'pointer' }}>
+            <IconUpload size={12} /> Upload
+            <input type="file" accept="image/*" hidden onChange={async (e) => {
+              const file = e.target.files?.[0];
+              e.target.value = '';
+              if (!file) return;
+              try { onChange(await fileToImageDataUrl(file)); } catch (err: any) { toast.error(err.message); }
+            }} />
+          </label>
+          {value && <button type="button" className="btn btn-ghost btn-sm" onClick={() => onChange('')}><IconTrash size={12} /> Remove</button>}
+        </div>
+        <input className="form-input" placeholder="…or paste an image URL (https://)" value={isData ? '' : value} disabled={isData}
+          onChange={(e) => onChange(e.target.value.trim())} />
+      </div>
+    </div>
+  );
+};
 
 // ------------------------------------------------------------------ Items
 
@@ -19,6 +76,7 @@ const ProductDrawer: React.FC<{ product: any | null; open: boolean; categories: 
   const { settings } = useOrg();
   const { list: locations, current } = useLocation();
   const recipesOn = useModule('recipes');
+  const imagesOn = useModule('menuImages');
   const groups = useApi(CATALOG.MODIFIER_GROUPS, {}, { skip: !open });
   const taxes = useApi(CATALOG.TAX_RATES, {}, { skip: !open });
   const stock = useApi(INVENTORY.ITEMS, { locationId: current?.id }, { skip: !open || !recipesOn || !current });
@@ -32,7 +90,7 @@ const ProductDrawer: React.FC<{ product: any | null; open: boolean; categories: 
       ...product, price: String(product.price), cost: product.cost != null ? String(product.cost) : '',
       modifierGroupIds: product.modifierGroups.map((g: any) => g.id), priceOverrides: product.priceOverrides || {},
     } : {
-      name: '', price: '', cost: '', categoryId: categories[0]?.id || '', taxRateId: '', stationId: '', sku: '', barcode: '', color: '',
+      name: '', price: '', cost: '', categoryId: categories[0]?.id || '', taxRateId: '', stationId: '', sku: '', barcode: '', color: '', imageUrl: '',
       isActive: true, trackStock: false, isOpenPrice: false, prepMinutes: '', dietary: [], channels: ['POS', 'ONLINE', 'KIOSK'], modifierGroupIds: [], priceOverrides: {},
     });
   }, [open, product, categories]);
@@ -52,7 +110,9 @@ const ProductDrawer: React.FC<{ product: any | null; open: boolean; categories: 
   const save = async () => {
     const input = {
       name: f.name, description: f.description || null, sku: f.sku || null, barcode: f.barcode || null, price, cost: f.cost === '' ? null : cost,
-      color: f.color || null, isActive: f.isActive, trackStock: f.trackStock, isOpenPrice: f.isOpenPrice,
+      color: f.color || null, isActive: f.isActive,
+      // Module off → leave stored images untouched so re-enabling brings them back
+      ...(imagesOn ? { imageUrl: f.imageUrl || null } : {}), trackStock: f.trackStock, isOpenPrice: f.isOpenPrice,
       prepMinutes: f.prepMinutes ? Number(f.prepMinutes) : null, dietary: f.dietary, channels: f.channels,
       categoryId: f.categoryId || null, taxRateId: f.taxRateId || null, stationId: f.stationId || null,
       modifierGroupIds: f.modifierGroupIds,
@@ -78,6 +138,7 @@ const ProductDrawer: React.FC<{ product: any | null; open: boolean; categories: 
       footer={<><button className="btn btn-secondary" onClick={onClose}>Cancel</button><button className="btn btn-primary" disabled={!f.name || f.price === ''} onClick={save}>Save item</button></>}>
       <div className="form-grid">
         <Field label="Name" full><input className="form-input" autoFocus value={f.name || ''} onChange={(e) => set({ name: e.target.value })} /></Field>
+        {imagesOn && <Field label="Image" full hint="Shown on the POS button. Uploads are resized automatically."><ImageField value={f.imageUrl || ''} onChange={(v) => set({ imageUrl: v })} /></Field>}
         <Field label="Description" full><input className="form-input" value={f.description || ''} onChange={(e) => set({ description: e.target.value })} /></Field>
         <Field label="Category">
           <select className="form-select" value={f.categoryId || ''} onChange={(e) => set({ categoryId: e.target.value })}>
@@ -175,6 +236,7 @@ const ProductDrawer: React.FC<{ product: any | null; open: boolean; categories: 
 const ItemsTab: React.FC = () => {
   const can = useCan();
   const mutate = useMutate();
+  const imagesOn = useModule('menuImages');
   const [search, setSearch] = useState('');
   const [cat, setCat] = useState('');
   const [editing, setEditing] = useState<any | null | undefined>(undefined);
@@ -212,7 +274,8 @@ const ItemsTab: React.FC = () => {
                 const m = p.price && c != null ? ((p.price - c) / p.price) * 100 : null;
                 return (
                   <tr key={p.id} className="clickable" onClick={() => can('menu.manage') && setEditing(p)} style={{ opacity: p.isActive ? 1 : 0.5 }}>
-                    <td><span className="dot" style={{ background: p.color || p.category?.color || 'var(--color-primary)', marginRight: 6 }} /><span className="strong">{p.name}</span>
+                    <td>{imagesOn && (p.imageUrl ? <img className="menu-thumb" src={p.imageUrl} alt="" /> : <span className="menu-thumb" />)}
+                      <span className="dot" style={{ background: p.color || p.category?.color || 'var(--color-primary)', marginRight: 6 }} /><span className="strong">{p.name}</span>
                       {p.dietary.length > 0 && <span className="small muted"> · {p.dietary.map(label).join(', ')}</span>}
                       {p.sku && <div className="small muted mono">{p.sku}</div>}</td>
                     <td>{p.category?.name || '—'}</td>

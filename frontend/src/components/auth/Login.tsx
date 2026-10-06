@@ -35,7 +35,7 @@ export const Login: React.FC = () => {
   return (
     <AuthLayout>
       <div style={{ marginBottom: '2rem' }}>
-        <div style={{ color: '#7c3aed', fontSize: '0.875rem', fontWeight: 600, letterSpacing: '0.1em', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Sign In</div>
+        <div style={{ color: 'var(--color-primary)', fontSize: '0.875rem', fontWeight: 600, letterSpacing: '0.1em', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Sign In</div>
         <h2 className="auth-title">Welcome back.</h2>
         <p className="auth-subtitle" style={{ margin: 0 }}>Access your MageOS workspace.</p>
       </div>
@@ -52,7 +52,7 @@ export const Login: React.FC = () => {
             onChange={e => setEmail(e.target.value)}
             autoComplete="email"
             required
-            style={{ background: 'rgba(255, 255, 255, 0.05)', borderColor: 'rgba(255, 255, 255, 0.1)', color: '#f1f5f9' }}
+            style={{ background: 'rgba(255, 255, 255, 0.05)', borderColor: 'rgba(255, 255, 255, 0.1)', color: '#fafafa' }}
           />
         </div>
 
@@ -70,19 +70,19 @@ export const Login: React.FC = () => {
             onChange={e => setPassword(e.target.value)}
             autoComplete="current-password"
             required
-            style={{ background: 'rgba(255, 255, 255, 0.05)', borderColor: 'rgba(255, 255, 255, 0.1)', color: '#f1f5f9' }}
+            style={{ background: 'rgba(255, 255, 255, 0.05)', borderColor: 'rgba(255, 255, 255, 0.1)', color: '#fafafa' }}
           />
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.5rem' }}>
           <input type="checkbox" id="keep-signed-in" style={{ cursor: 'pointer' }} />
-          <label htmlFor="keep-signed-in" style={{ fontSize: '0.875rem', color: '#94a3b8', cursor: 'pointer' }}>Keep me signed in on this device</label>
+          <label htmlFor="keep-signed-in" style={{ fontSize: '0.875rem', color: '#a3a3a3', cursor: 'pointer' }}>Keep me signed in on this device</label>
         </div>
 
         <button
           type="submit"
           className="btn btn-primary btn-lg"
-          style={{ width: '100%', padding: '0.75rem', fontSize: '1rem', background: '#7c3aed' }}
+          style={{ width: '100%', padding: '0.75rem', fontSize: '1rem', background: 'var(--color-primary)' }}
           disabled={loading}
           id="login-submit"
         >
@@ -109,7 +109,7 @@ export const Login: React.FC = () => {
         </button>
       </div>
 
-      <p className="text-center" style={{ fontSize: '0.875rem', color: '#94a3b8', marginTop: '2rem' }}>
+      <p className="text-center" style={{ fontSize: '0.875rem', color: '#a3a3a3', marginTop: '2rem' }}>
         New to MageOS?{' '}
         <Link to="/register" className="auth-link">
           Request workspace access

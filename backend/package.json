@@ -14,7 +14,8 @@
     "db:migrate": "prisma migrate dev",
     "db:studio": "prisma studio",
     "seed": "ts-node src/seed.ts",
-    "db:backfill": "ts-node --transpile-only src/scripts/backfill.ts"
+    "db:backfill": "ts-node --transpile-only src/scripts/backfill.ts",
+    "db:seed:tamilnadu": "ts-node --transpile-only src/scripts/seed-tamilnadu.ts"
   },
   "dependencies": {
     "@apollo/server": "^4.10.0",

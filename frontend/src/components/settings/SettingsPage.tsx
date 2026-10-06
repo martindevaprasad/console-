@@ -6,7 +6,7 @@ import {
 } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 import { useApi, useAppearance, useCan, useMutate, useOrg } from '@/hooks';
-import type { Theme, SidebarVariant, Density } from '@/hooks';
+import type { Theme, Palette, SidebarVariant, Density } from '@/hooks';
 import { useSessionLoader } from '@/hooks/useSession';
 import { AUTH, ORG_API } from '@/services/api';
 import { MODULE_INFO, ORDER_TYPE_LABELS, ALL_ORDER_TYPES } from '@/lib/constants';
@@ -16,9 +16,18 @@ import { Field, Toggle, SettingRow, Segmented, Empty } from '../shared/ui';
 type Tab = 'business' | 'region' | 'service' | 'modules' | 'security' | 'loyalty' | 'account' | 'appearance' | 'audit';
 
 const VARIANTS: { key: SidebarVariant; label: string; desc: string; bg: string; accent: string }[] = [
-  { key: 'aurora', label: 'Aurora', desc: 'Deep indigo · enterprise default', bg: 'linear-gradient(180deg, #0a0f1e 0%, #070b14 100%)', accent: '#7c3aed' },
-  { key: 'onyx', label: 'Onyx', desc: 'Neutral charcoal · minimal contrast', bg: 'linear-gradient(180deg, #1a1a2e 0%, #12121a 100%)', accent: '#64748b' },
-  { key: 'frost', label: 'Frost', desc: 'Light · daytime / high-readability', bg: 'linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%)', accent: '#6366f1' },
+  { key: 'aurora', label: 'Aurora', desc: 'Black · brand-color highlights (default)', bg: 'linear-gradient(180deg, #0a0a0a 0%, #000000 100%)', accent: 'var(--color-primary)' },
+  { key: 'onyx', label: 'Onyx', desc: 'Charcoal · fully monochrome', bg: 'linear-gradient(180deg, #1c1c1c 0%, #141414 100%)', accent: '#a3a3a3' },
+  { key: 'frost', label: 'Frost', desc: 'White · daytime / high-readability', bg: 'linear-gradient(180deg, #ffffff 0%, #f5f5f5 100%)', accent: 'var(--color-primary)' },
+];
+
+// Single-color system — swatches: [sidebar, brand color, background dark, background light]
+const PALETTES: { key: Palette; label: string; desc: string; swatches: string[] }[] = [
+  { key: 'default', label: 'MageOS Classic', desc: 'Violet on black & white · default', swatches: ['#000000', '#7c3aed', '#0a0a0a', '#ffffff'] },
+  { key: 'fintech', label: 'Modern Fintech', desc: 'Sky blue on navy · SaaS & cafe chains', swatches: ['#0f172a', '#0ea5e9', '#1e293b', '#f8fafc'] },
+  { key: 'hospitality', label: 'Hospitality Warmth', desc: 'Sage green on charcoal · upscale & bakeries', swatches: ['#1c1917', '#059669', '#292524', '#fafaf9'] },
+  { key: 'minimal', label: 'Ultra-Minimalist', desc: 'Indigo on OLED black · bars & nightclubs', swatches: ['#000000', '#6366f1', '#09090b', '#ffffff'] },
+  { key: 'oceanic', label: 'Oceanic Efficiency', desc: 'Ocean blue on deep navy · high-stress floors', swatches: ['#1e3a8a', '#2563eb', '#0f172a', '#f0f9ff'] },
 ];
 
 const THEMES: { key: Theme; label: string; icon: React.ReactNode }[] = [
@@ -48,6 +57,19 @@ const AppearanceTab: React.FC = () => {
             <button key={t.key} className={`theme-card${draft.theme === t.key ? ' selected' : ''}`} onClick={() => setDraft((d) => ({ ...d, theme: t.key }))}>
               <span className="theme-card-icon">{t.icon}</span><span className="theme-card-label">{t.label}</span>
               {draft.theme === t.key && <span className="theme-card-check"><IconCheck size={12} /></span>}
+            </button>
+          ))}
+        </div>
+      </section>
+      <section className="settings-section">
+        <h2 className="settings-section-title">Color palette</h2>
+        <p className="settings-section-desc">Brand colors for buttons, selections and backgrounds. Works with light and dark themes.</p>
+        <div className="palette-grid">
+          {PALETTES.map((p) => (
+            <button key={p.key} className={`variant-card${draft.palette === p.key ? ' selected' : ''}`} onClick={() => setDraft((d) => ({ ...d, palette: p.key }))}>
+              <div className="palette-swatches">{p.swatches.map((c, i) => <span key={i} style={{ background: c }} />)}</div>
+              <div className="variant-info"><div className="variant-name">{p.label}</div><div className="variant-desc">{p.desc}</div></div>
+              {draft.palette === p.key && <span className="variant-badge">ACTIVE</span>}
             </button>
           ))}
         </div>
@@ -192,7 +214,7 @@ const SettingsPage: React.FC = () => {
     { key: 'loyalty', label: 'Loyalty & receipts', sub: 'Points, receipt text', icon: <IconStar size={16} />, admin: true },
     { key: 'audit', label: 'Audit log', sub: 'Who did what, when', icon: <IconHistory size={16} />, admin: true },
     { key: 'account', label: 'My account', sub: 'Password & PIN', icon: <IconUserCircle size={16} /> },
-    { key: 'appearance', label: 'Appearance', sub: 'Theme, sidebar, density', icon: <IconPalette size={16} /> },
+    { key: 'appearance', label: 'Appearance', sub: 'Theme, palette, sidebar, density', icon: <IconPalette size={16} /> },
   ];
 
   return (

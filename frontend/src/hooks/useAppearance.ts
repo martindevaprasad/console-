@@ -1,11 +1,14 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 
 export type Theme = 'dark' | 'light' | 'system';
+/** Brand color palette, independent of light/dark. 'default' is the original MageOS look. */
+export type Palette = 'default' | 'fintech' | 'hospitality' | 'minimal' | 'oceanic';
 export type SidebarVariant = 'aurora' | 'onyx' | 'frost';
 export type Density = 'compact' | 'comfortable';
 
 export interface AppearanceSettings {
   theme: Theme;
+  palette: Palette;
   sidebarVariant: SidebarVariant;
   density: Density;
   animations: boolean;
@@ -15,6 +18,7 @@ const STORAGE_KEY = 'nexuspos-appearance';
 
 const defaults: AppearanceSettings = {
   theme: 'dark',
+  palette: 'default',
   sidebarVariant: 'aurora',
   density: 'compact',
   animations: true,
@@ -39,6 +43,10 @@ export function applyToDOM(s: AppearanceSettings) {
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const useDark = s.theme === 'dark' || (s.theme === 'system' && prefersDark);
   root.setAttribute('data-theme', useDark ? 'dark' : 'light');
+
+  // Color palette ('default' = no attribute, so :root tokens apply untouched)
+  if (s.palette === 'default') root.removeAttribute('data-palette');
+  else root.setAttribute('data-palette', s.palette);
 
   // Sidebar variant
   root.setAttribute('data-sidebar', s.sidebarVariant);

@@ -12,7 +12,7 @@ import { ORG_API } from '@/services/api';
 import { MODULE_INFO, ORDER_TYPE_LABELS, ALL_ORDER_TYPES } from '@/lib/constants';
 import { Field, Segmented, Toggle, SettingRow } from '../shared/ui';
 import LoadingSpinner from '../shared/LoadingSpinner';
-import { MageOS } from '../layout/AppSvgs';
+import { MageWordmark } from '../layout/AppSvgs';
 
 const TYPE_ICONS: Record<string, React.ReactNode> = {
   FINE_DINING: <IconChefHat size={16} />, CASUAL_DINING: <IconToolsKitchen2 size={16} />, RESTAURANT: <IconBuildingStore size={16} />,
@@ -24,7 +24,7 @@ const TYPE_ICONS: Record<string, React.ReactNode> = {
 const DEFAULT_MODULES: Record<string, boolean> = {
   tables: true, reservations: true, kds: true, inventory: true, recipes: false, purchasing: false,
   customers: true, loyalty: false, promotions: true, cashManagement: true, timeclock: true,
-  onlineOrdering: false, multiLocation: false,
+  onlineOrdering: false, multiLocation: false, menuImages: false,
 };
 
 const STEPS = ['Business type', 'Scale', 'Region & tax', 'Locations', 'Service & modules', 'Menu & team', 'Review'];
@@ -138,12 +138,9 @@ export const OnboardingWizard: React.FC = () => {
   return (
     <div className="onb-shell">
       <aside className="onb-steps">
-        <div className="row" style={{ marginBottom: 20 }}>
-          <MageOS />
-          <div>
-            <div className="sidebar-logo-text">MageOS</div>
-            <div className="small muted">Business setup</div>
-          </div>
+        <div style={{ marginBottom: 20 }}>
+          <MageWordmark height={32} className="brand-wordmark" />
+          <div className="small muted">Business setup</div>
         </div>
         {STEPS.map((s, i) => (
           <div key={s} className={`onb-step${i === step ? ' active' : ''}${i < step ? ' done' : ''}`}>

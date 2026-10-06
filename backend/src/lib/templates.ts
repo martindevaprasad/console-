@@ -5,7 +5,7 @@
 export type ModuleKey =
   | 'tables' | 'reservations' | 'kds' | 'inventory' | 'recipes' | 'purchasing'
   | 'customers' | 'loyalty' | 'promotions' | 'cashManagement' | 'timeclock'
-  | 'onlineOrdering' | 'multiLocation';
+  | 'onlineOrdering' | 'multiLocation' | 'menuImages';
 
 export interface OrgSettings {
   serviceModel: 'TABLE_SERVICE' | 'COUNTER' | 'HYBRID' | 'DELIVERY_ONLY';
@@ -39,7 +39,7 @@ export const DEFAULT_SETTINGS: OrgSettings = {
   modules: {
     tables: true, reservations: true, kds: true, inventory: true, recipes: false, purchasing: false,
     customers: true, loyalty: false, promotions: true, cashManagement: true, timeclock: true,
-    onlineOrdering: false, multiLocation: false,
+    onlineOrdering: false, multiLocation: false, menuImages: false,
   },
   pos: {
     courses: false, seats: false, tipping: true, tipPresets: [10, 15, 20],

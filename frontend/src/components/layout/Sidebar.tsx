@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useAuth, useCan, useOrg } from '@/hooks';
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
-import { MageOS } from './AppSvgs';
+import { MageMark, MageWordmark } from './AppSvgs';
 import { visibleNav } from '@/lib/nav';
 import { ROLE_LABELS } from '@/lib/constants';
 
@@ -24,10 +24,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
   return (
     <aside className={`sidebar${collapsed ? ' sidebar-collapsed' : ''}`}>
       <div className="sidebar-logo">
-        <MageOS />
-        {!collapsed && (
+        {collapsed ? <MageMark size={30} /> : (
           <div className="sidebar-logo-texts">
-            <div className="sidebar-logo-text">MageOS</div>
+            <MageWordmark height={30} className="brand-wordmark" />
             <div className="sidebar-logo-sub truncate">{org?.name || 'Enterprise POS'}</div>
           </div>
         )}

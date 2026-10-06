@@ -65,7 +65,7 @@ export const Register: React.FC = () => {
   return (
     <AuthLayout>
       <div style={{ marginBottom: '2rem' }}>
-        <div style={{ color: '#7c3aed', fontSize: '0.875rem', fontWeight: 600, letterSpacing: '0.1em', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Sign Up</div>
+        <div style={{ color: 'var(--color-primary)', fontSize: '0.875rem', fontWeight: 600, letterSpacing: '0.1em', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Sign Up</div>
         <h2 className="auth-title">Create workspace.</h2>
         <p className="auth-subtitle" style={{ margin: 0 }}>Join MageOS to get started.</p>
       </div>
@@ -78,7 +78,7 @@ export const Register: React.FC = () => {
               flex: 1,
               height: 4,
               borderRadius: 2,
-              background: step >= s ? '#7c3aed' : 'rgba(255,255,255,0.1)',
+              background: step >= s ? 'var(--color-primary)' : 'rgba(255,255,255,0.1)',
               transition: 'all 0.3s',
             }}
           />
@@ -97,7 +97,7 @@ export const Register: React.FC = () => {
               value={form.name}
               onChange={e => update('name', e.target.value)}
               required
-              style={{ background: 'rgba(255, 255, 255, 0.05)', borderColor: 'rgba(255, 255, 255, 0.1)', color: '#f1f5f9' }}
+              style={{ background: 'rgba(255, 255, 255, 0.05)', borderColor: 'rgba(255, 255, 255, 0.1)', color: '#fafafa' }}
             />
           </div>
           <div className="form-group">
@@ -110,7 +110,7 @@ export const Register: React.FC = () => {
               value={form.email}
               onChange={e => update('email', e.target.value)}
               required
-              style={{ background: 'rgba(255, 255, 255, 0.05)', borderColor: 'rgba(255, 255, 255, 0.1)', color: '#f1f5f9' }}
+              style={{ background: 'rgba(255, 255, 255, 0.05)', borderColor: 'rgba(255, 255, 255, 0.1)', color: '#fafafa' }}
             />
           </div>
           <div className="form-group">
@@ -123,7 +123,7 @@ export const Register: React.FC = () => {
               value={form.password}
               onChange={e => update('password', e.target.value)}
               required
-              style={{ background: 'rgba(255, 255, 255, 0.05)', borderColor: 'rgba(255, 255, 255, 0.1)', color: '#f1f5f9' }}
+              style={{ background: 'rgba(255, 255, 255, 0.05)', borderColor: 'rgba(255, 255, 255, 0.1)', color: '#fafafa' }}
             />
           </div>
           <div className="form-group">
@@ -136,10 +136,10 @@ export const Register: React.FC = () => {
               value={form.confirmPassword}
               onChange={e => update('confirmPassword', e.target.value)}
               required
-              style={{ background: 'rgba(255, 255, 255, 0.05)', borderColor: 'rgba(255, 255, 255, 0.1)', color: '#f1f5f9' }}
+              style={{ background: 'rgba(255, 255, 255, 0.05)', borderColor: 'rgba(255, 255, 255, 0.1)', color: '#fafafa' }}
             />
           </div>
-          <button type="submit" className="btn btn-primary btn-lg" style={{ width: '100%', padding: '0.75rem', fontSize: '1rem', background: '#7c3aed' }} id="reg-next">
+          <button type="submit" className="btn btn-primary btn-lg" style={{ width: '100%', padding: '0.75rem', fontSize: '1rem', background: 'var(--color-primary)' }} id="reg-next">
             Continue →
           </button>
         </form>
@@ -155,7 +155,7 @@ export const Register: React.FC = () => {
               value={form.organizationName}
               onChange={e => update('organizationName', e.target.value)}
               required
-              style={{ background: 'rgba(255, 255, 255, 0.05)', borderColor: 'rgba(255, 255, 255, 0.1)', color: '#f1f5f9' }}
+              style={{ background: 'rgba(255, 255, 255, 0.05)', borderColor: 'rgba(255, 255, 255, 0.1)', color: '#fafafa' }}
             />
           </div>
 
@@ -169,10 +169,10 @@ export const Register: React.FC = () => {
                   onClick={() => update('orgType', type.value)}
                   style={{
                     padding: '12px',
-                    border: `2px solid ${form.orgType === type.value ? '#7c3aed' : 'rgba(255,255,255,0.1)'}`,
+                    border: `2px solid ${form.orgType === type.value ? 'var(--color-primary)' : 'rgba(255,255,255,0.1)'}`,
                     borderRadius: '8px',
-                    background: form.orgType === type.value ? 'rgba(124, 58, 237, 0.15)' : 'transparent',
-                    color: form.orgType === type.value ? '#9d6ff0' : '#94a3b8',
+                    background: form.orgType === type.value ? 'rgba(var(--color-primary-rgb), 0.15)' : 'transparent',
+                    color: form.orgType === type.value ? 'var(--color-primary-light)' : '#a3a3a3',
                     cursor: 'pointer',
                     fontSize: '0.875rem',
                     fontWeight: 600,
@@ -192,7 +192,7 @@ export const Register: React.FC = () => {
             <button
               type="submit"
               className="btn btn-primary"
-              style={{ flex: 2, padding: '0.75rem', background: '#7c3aed' }}
+              style={{ flex: 2, padding: '0.75rem', background: 'var(--color-primary)' }}
               disabled={loading}
               id="reg-submit"
             >
@@ -204,7 +204,7 @@ export const Register: React.FC = () => {
         </form>
       )}
 
-      <p className="text-center" style={{ fontSize: '0.875rem', color: '#94a3b8', marginTop: '2rem' }}>
+      <p className="text-center" style={{ fontSize: '0.875rem', color: '#a3a3a3', marginTop: '2rem' }}>
         Already have an account?{' '}
         <Link to="/login" className="auth-link">
           Sign in

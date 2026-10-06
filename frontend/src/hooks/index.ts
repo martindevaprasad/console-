@@ -105,4 +105,4 @@ export function useMutate() {
 
 // Appearance
 export { useAppearance, AppearanceContext } from './useAppearance';
-export type { AppearanceSettings, Theme, SidebarVariant, Density } from './useAppearance';
+export type { AppearanceSettings, Theme, Palette, SidebarVariant, Density } from './useAppearance';

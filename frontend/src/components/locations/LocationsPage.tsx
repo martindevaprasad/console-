@@ -10,7 +10,7 @@ import Modal from '../shared/Modal';
 import LoadingSpinner from '../shared/LoadingSpinner';
 
 const DEVICE_TYPES = ['POS', 'KDS', 'KIOSK', 'PRINTER', 'PAYMENT_TERMINAL', 'CUSTOMER_DISPLAY'];
-const COLORS = ['#7c3aed', '#06b6d4', '#10b981', '#f59e0b', '#ef4444', '#3b82f6'];
+const COLORS = ['#7c3aed', '#10b981', '#f59e0b', '#ef4444', '#3b82f6'];
 
 export const LocationsPage: React.FC = () => {
   const dispatch = useAppDispatch();
