@@ -10,6 +10,7 @@ import { visibleNav } from '@/lib/nav';
 import Layout from './components/layout/Layout';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
+const LandingPage = lazy(() => import('./components/landing/LandingPage'));
 const OnboardingWizard = lazy(() => import('./components/onboarding/OnboardingWizard'));
 const Dashboard = lazy(() => import('./components/dashboard/Dashboard'));
 const POSTerminal = lazy(() => import('./components/pos/POSTerminal'));
@@ -57,6 +58,7 @@ const AppRoutes: React.FC = () => {
 
   return (
     <Routes>
+      <Route path="/" element={isAuthenticated ? <Navigate to={needsOnboarding ? '/onboarding' : home} replace /> : <LandingPage />} />
       <Route path="/login" element={isAuthenticated ? <Navigate to={home} replace /> : <Login />} />
       <Route path="/register" element={isAuthenticated ? <Navigate to="/onboarding" replace /> : <Register />} />
       <Route
