@@ -10,7 +10,7 @@ import Modal from '../shared/Modal';
 import LoadingSpinner from '../shared/LoadingSpinner';
 
 type Tab = 'items' | 'categories' | 'modifiers' | 'taxes';
-const COLORS = ['#7c3aed', '#10b981', '#f59e0b', '#ef4444', '#3b82f6', '#ec4899', '#a3a3a3'];
+const COLORS = ['#5e84ff', '#67ffcc', '#10b981', '#f59e0b', '#ef4444', '#3b82f6', '#ec4899', '#a3a3a3'];
 
 /**
  * Downscale an uploaded photo to a small JPEG data URL. Images are stored inline

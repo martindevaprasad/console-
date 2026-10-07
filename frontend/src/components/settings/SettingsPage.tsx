@@ -16,14 +16,14 @@ import { Field, Toggle, SettingRow, Segmented, Empty } from '../shared/ui';
 type Tab = 'business' | 'region' | 'service' | 'modules' | 'security' | 'loyalty' | 'account' | 'appearance' | 'audit';
 
 const VARIANTS: { key: SidebarVariant; label: string; desc: string; bg: string; accent: string }[] = [
-  { key: 'aurora', label: 'Aurora', desc: 'Black · brand-color highlights (default)', bg: 'linear-gradient(180deg, #0a0a0a 0%, #000000 100%)', accent: 'var(--color-primary)' },
+  { key: 'aurora', label: 'Aurora', desc: 'Midnight navy · brand-color highlights (default)', bg: 'linear-gradient(180deg, #0d1120 0%, #080a12 100%)', accent: 'var(--color-primary)' },
   { key: 'onyx', label: 'Onyx', desc: 'Charcoal · fully monochrome', bg: 'linear-gradient(180deg, #1c1c1c 0%, #141414 100%)', accent: '#a3a3a3' },
   { key: 'frost', label: 'Frost', desc: 'White · daytime / high-readability', bg: 'linear-gradient(180deg, #ffffff 0%, #f5f5f5 100%)', accent: 'var(--color-primary)' },
 ];
 
 // Single-color system — swatches: [sidebar, brand color, background dark, background light]
 const PALETTES: { key: Palette; label: string; desc: string; swatches: string[] }[] = [
-  { key: 'default', label: 'MageOS Classic', desc: 'Violet on black & white · default', swatches: ['#000000', '#7c3aed', '#0a0a0a', '#ffffff'] },
+  { key: 'default', label: 'MaGe Brand', desc: 'Brand blue & mint on midnight navy · default', swatches: ['#0b0e17', '#5e84ff', '#67ffcc', '#ffffff'] },
   { key: 'fintech', label: 'Modern Fintech', desc: 'Sky blue on navy · SaaS & cafe chains', swatches: ['#0f172a', '#0ea5e9', '#1e293b', '#f8fafc'] },
   { key: 'hospitality', label: 'Hospitality Warmth', desc: 'Sage green on charcoal · upscale & bakeries', swatches: ['#1c1917', '#059669', '#292524', '#fafaf9'] },
   { key: 'minimal', label: 'Ultra-Minimalist', desc: 'Indigo on OLED black · bars & nightclubs', swatches: ['#000000', '#6366f1', '#09090b', '#ffffff'] },

@@ -6,32 +6,37 @@
 
 /* ---- CSS Variables ---- */
 :root {
-  /* Single-color system: one brand hue (violet by default) on neutral
-     black/white surfaces. Semantic status colors (success/warning/danger/
-     info) are the only other hues. Palettes override only the brand tokens
-     and backgrounds (see COLOR PALETTES below). */
+  /* MaGe brand system (matches the login hero): brand blue as the primary
+     hue, mint as the accent, on midnight-navy surfaces. Semantic status
+     colors (success/warning/danger/info) are the only other hues. Palettes
+     override only the brand tokens and backgrounds (see COLOR PALETTES below). */
+
+  /* Fixed brand constants — not overridden by theme or palette */
+  --brand-blue: #5e84ff;
+  --brand-mint: #67ffcc;
+  --brand-ink: #0b0e17;
+  --gradient-brand: linear-gradient(100deg, var(--brand-blue) 0%, var(--brand-mint) 100%);
 
   /* Neutrals */
-  --color-bg-primary: #0a0a0a;
-  --color-bg-secondary: #121212;
-  --color-bg-tertiary: #171717;
+  --color-bg-primary: #0b0e17;
+  --color-bg-secondary: #11151f;
+  --color-bg-tertiary: #171c28;
   --color-surface: rgba(255, 255, 255, 0.04);
   --color-surface-hover: rgba(255, 255, 255, 0.07);
   --color-border: rgba(255, 255, 255, 0.08);
   --color-border-hover: rgba(var(--color-primary-rgb), 0.4);
 
   /* Brand — the -rgb channels feed every translucent tint */
-  --color-primary-rgb: 124, 58, 237;
-  --color-primary: #7c3aed;
-  --color-primary-light: #9d6ff0;
-  --color-primary-dark: #5b21b6;
+  --color-primary-rgb: 94, 132, 255;
+  --color-primary: #5e84ff;
+  --color-primary-light: #8aa6ff;
+  --color-primary-dark: #3b5bdb;
   --color-primary-glow: rgba(var(--color-primary-rgb), 0.25);
 
-  /* "Accent" is kept as an alias of the brand color so existing
-     .text-accent / .kpi.accent / metric-icon usages stay single-hue. */
-  --color-accent: var(--color-primary);
-  --color-accent-light: var(--color-primary-light);
-  --color-accent-glow: var(--color-primary-glow);
+  /* Mint accent for highlights, KPIs and secondary chart series */
+  --color-accent: #67ffcc;
+  --color-accent-light: #67ffcc;
+  --color-accent-glow: rgba(103, 255, 204, 0.18);
 
   --color-success: #10b981;
   --color-success-light: #34d399;
@@ -57,8 +62,9 @@
   /* Gradients (single hue: light → dark shade of the brand color) */
   --gradient-primary: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
   --gradient-card: linear-gradient(135deg, rgba(var(--color-primary-rgb), 0.15) 0%, rgba(var(--color-primary-rgb), 0.03) 100%);
-  --gradient-sidebar: linear-gradient(180deg, #0a0a0a 0%, #000000 100%);
-  --gradient-hero: radial-gradient(ellipse at 20% 50%, rgba(var(--color-primary-rgb), 0.15) 0%, transparent 60%);
+  --gradient-sidebar: linear-gradient(180deg, #0d1120 0%, #080a12 100%);
+  --gradient-hero: radial-gradient(ellipse at 15% 100%, rgba(var(--color-primary-rgb), 0.12) 0%, transparent 55%),
+                   radial-gradient(ellipse at 100% 0%, rgba(103, 255, 204, 0.05) 0%, transparent 50%);
 
   /* Typography */
   --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -860,18 +866,17 @@ a:hover { color: var(--color-accent); }
 .auth-split-layout {
   display: flex;
   min-height: 100vh;
-  background-color: #0a0a0a; /* Deep dark background */
+  background-color: var(--brand-ink);
 }
 
 .auth-left-panel {
-  --mint: #67ffcc;
-  --brand-blue: #5e84ff;
+  --mint: var(--brand-mint);
   flex: 1.15;
   display: flex;
   padding: 3rem 3.5rem;
-  background: radial-gradient(ellipse at bottom left, rgba(var(--color-primary-rgb), 0.18) 0%, transparent 60%),
+  background: radial-gradient(ellipse at bottom left, rgba(124, 58, 237, 0.16) 0%, transparent 60%),
               radial-gradient(ellipse at top right, rgba(94, 132, 255, 0.10) 0%, transparent 55%),
-              #0a0a0a;
+              var(--brand-ink);
   border-right: 1px solid rgba(255, 255, 255, 0.05);
   position: relative;
   overflow: hidden;
@@ -1025,7 +1030,7 @@ a:hover { color: var(--color-accent); }
 }
 
 .auth-heading-accent {
-  background: linear-gradient(100deg, var(--brand-blue) 0%, var(--mint) 100%);
+  background: var(--gradient-brand);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1165,8 +1170,25 @@ a:hover { color: var(--color-accent); }
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at 50% 30%, rgba(var(--color-primary-rgb), 0.08), transparent 60%), #0a0a0a;
+  position: relative;
+  background: radial-gradient(ellipse at 100% 0%, rgba(103, 255, 204, 0.07) 0%, transparent 50%),
+              radial-gradient(circle at 50% 35%, rgba(94, 132, 255, 0.12), transparent 60%),
+              radial-gradient(ellipse at 0% 100%, rgba(124, 58, 237, 0.10) 0%, transparent 55%),
+              linear-gradient(180deg, #0f1320 0%, var(--brand-ink) 100%);
 }
+
+/* Form side uses the hero palette regardless of the console's palette setting */
+.auth-right-panel .form-input:focus,
+.auth-right-panel .form-select:focus {
+  border-color: var(--brand-blue) !important; /* beats the inline borderColor on the auth inputs */
+  box-shadow: 0 0 0 3px rgba(94, 132, 255, 0.2);
+}
+.auth-right-panel .btn-primary {
+  background: var(--brand-blue) !important;
+  box-shadow: 0 10px 30px -12px var(--brand-blue);
+}
+.auth-right-panel .btn-primary:hover:not(:disabled) { background: #7a9aff !important; }
+.auth-right-panel .auth-link { color: var(--brand-mint); }
 
 .auth-form-container {
   width: 100%;
@@ -1818,7 +1840,7 @@ body:has(.main-content-collapsed) .topbar {
 
 /* --- Aurora (default: black) --- */
 [data-sidebar='aurora'] .sidebar {
-  background: var(--sidebar-aurora-bg, linear-gradient(180deg, #0a0a0a 0%, #000000 100%));
+  background: var(--sidebar-aurora-bg, var(--gradient-sidebar));
 }
 [data-sidebar='aurora'] .sidebar-item:hover {
   background: rgba(var(--color-primary-rgb), 0.12);
@@ -1885,7 +1907,10 @@ body:has(.main-content-collapsed) .topbar {
   --color-surface-hover: rgba(0, 0, 0, 0.07);
   --color-border: rgba(0, 0, 0, 0.1);
   --color-border-hover: rgba(var(--color-primary-rgb), 0.4);
-  --color-primary-light: #6d28d9; /* brand text needs a deeper shade on white */
+  --color-primary-light: #3b5bdb; /* brand text needs a deeper shade on white */
+  --color-accent: #0f9f75;        /* mint is unreadable on white; use a deep teal */
+  --color-accent-light: #0f9f75;
+  --color-accent-glow: rgba(15, 159, 117, 0.15);
   --text-primary: #0a0a0a;
   --text-secondary: #525252;
   --text-muted: #a3a3a3;
@@ -1909,6 +1934,13 @@ body:has(.main-content-collapsed) .topbar {
    Accent, gradients, glows and shadows all derive from the brand
    tokens in :root. "default" has no block — it is the :root look.
    ============================================================ */
+
+/* Non-default palettes stay single-hue: accent follows their brand color. */
+[data-palette] {
+  --color-accent: var(--color-primary);
+  --color-accent-light: var(--color-primary-light);
+  --color-accent-glow: var(--color-primary-glow);
+}
 
 /* --- Modern Fintech: Electric Sky Blue on Midnight Navy --- */
 [data-palette='fintech'] {
