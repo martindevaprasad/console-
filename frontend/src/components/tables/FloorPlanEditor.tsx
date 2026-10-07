@@ -4,6 +4,7 @@ import { IconPlus, IconTrash, IconPencil, IconCircle, IconSquare } from '@tabler
 import { api, TABLE_MANAGEMENT } from '../../services/api';
 import { useAuth } from '@/hooks';
 import { Field } from '../shared/ui';
+import { FloorTable } from './FloorTable';
 
 interface FloorPlanEditorProps {
   locationId: string;
@@ -74,7 +75,7 @@ export const FloorPlanEditor: React.FC<FloorPlanEditorProps> = ({ locationId }) 
     try {
       const res = await api.mutation(TABLE_MANAGEMENT.CREATE_TABLE, {
         zoneId: zone.id, name: `T${n}`, capacity: shape === 'ROUND' ? 2 : 4, shape,
-        x: 20 + ((n - 1) % 6) * 120, y: 20 + Math.floor((n - 1) / 6) * 110, width: shape === 'ROUND' ? 80 : 100, height: 80,
+        x: 20 + ((n - 1) % 6) * 170, y: 20 + Math.floor((n - 1) / 6) * 150, width: shape === 'ROUND' ? 80 : 100, height: 80,
       }, token);
       await fetchZones();
       setSelectedId(res.createTable.id);
@@ -165,16 +166,15 @@ export const FloorPlanEditor: React.FC<FloorPlanEditorProps> = ({ locationId }) 
         onPointerDown={(e) => { if (e.target === e.currentTarget) setSelectedId(null); }}>
         {!zone && <div className="loading-overlay">Create a zone to start designing your floor.</div>}
         {zone?.tables.map((t: any) => (
-          <div key={t.id} className="floor-table" onPointerDown={(e) => onPointerDown(e, t)}
-            style={{
-              left: t.x, top: t.y, width: t.width, height: t.height, borderRadius: t.shape === 'ROUND' ? '50%' : 10,
+          <FloorTable key={t.id} table={t} occupied={0} accent="var(--color-primary)" onPointerDown={(e) => onPointerDown(e, t)}
+            style={{ cursor: drag?.id === t.id ? 'grabbing' : 'grab' }}
+            bodyStyle={{
               background: t.id === selectedId ? 'var(--color-primary-glow)' : 'var(--color-surface)',
               borderColor: t.id === selectedId ? 'var(--color-primary)' : 'var(--color-border-hover)',
-              color: 'var(--text-primary)', cursor: drag?.id === t.id ? 'grabbing' : 'grab',
             }}>
             <span className="floor-table-name">{t.name}</span>
             <span className="floor-table-meta">{t.capacity} seats</span>
-          </div>
+          </FloorTable>
         ))}
       </div>
     </div>

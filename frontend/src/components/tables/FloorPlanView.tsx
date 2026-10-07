@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import { IconUsers } from '@tabler/icons-react';
 import { TABLE_MANAGEMENT } from '../../services/api';
 import { useApi, useMutate } from '@/hooks';
 import { TABLE_STATUS_STYLE } from '@/lib/constants';
 import { money, minutesSince } from '@/lib/format';
 import { TableStatusBadge, TableStatus } from './TableStatusBadge';
 import { TableActionsModal } from './TableActionsModal';
+import { FloorTable } from './FloorTable';
 import { Empty } from '../shared/ui';
 
 export const FloorPlanView: React.FC<{ locationId: string }> = ({ locationId }) => {
@@ -53,15 +55,17 @@ export const FloorPlanView: React.FC<{ locationId: string }> = ({ locationId }) 
         {zone.tables.map((t: any) => {
           const s = TABLE_STATUS_STYLE[t.status] || TABLE_STATUS_STYLE.AVAILABLE;
           const since = t.activeSession ? minutesSince(t.activeSession.startTime) : null;
+          const guests = t.activeSession?.guestCount ?? 0;
           return (
-            <button key={t.id} className="floor-table" onClick={() => setSelected(t)} title={`${t.name} — ${s.label}`}
-              style={{ left: t.x, top: t.y, width: t.width, height: t.height, borderRadius: t.shape === 'ROUND' ? '50%' : 10, background: s.bg, borderColor: s.color, color: 'var(--text-primary)' }}>
+            <FloorTable key={t.id} table={t} occupied={guests} accent={s.accent} bodyStyle={{ background: s.bg }}
+              role="button" tabIndex={0} title={`${t.name} — ${s.label} · ${guests}/${t.capacity} guests`}
+              onClick={() => setSelected(t)} onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), setSelected(t))}>
               <span className="floor-table-name">{t.name}</span>
-              <span className="floor-table-meta">
-                {t.activeSession ? `${t.activeSession.guestCount}/${t.capacity} · ${since}m` : `${t.capacity} seats`}
-              </span>
-              {t.currentOrder && <span className="floor-table-meta" style={{ color: s.color, fontWeight: 700 }}>{money(t.currentOrder.balanceDue)}</span>}
-            </button>
+              <span className="floor-table-count" style={{ color: s.accent }}><IconUsers size={14} /> {guests}</span>
+              {since !== null && (
+                <span className="floor-table-meta">{since}m{t.currentOrder ? ` · ${money(t.currentOrder.balanceDue)}` : ''}</span>
+              )}
+            </FloorTable>
           );
         })}
       </div>
